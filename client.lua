@@ -1,17 +1,17 @@
-local QBCore = exports['qb-core']:GetCoreObject()
+local QBCore = exports['qbr-core']:GetCoreObject()
 local scoreboardOpen = false
 local PlayerOptin = {}
 
 RegisterNetEvent('QBCore:Client:OnPlayerLoaded')
 AddEventHandler('QBCore:Client:OnPlayerLoaded', function()
     isLoggedIn = true
-    QBCore.Functions.TriggerCallback('qb-scoreboard:server:GetConfig', function(config)
+    QBCore.Functions.TriggerCallback('qbr-scoreboard:server:GetConfig', function(config)
         Config.IllegalActions = config
     end)
 end)
 
-RegisterNetEvent('qb-scoreboard:client:SetActivityBusy')
-AddEventHandler('qb-scoreboard:client:SetActivityBusy', function(activity, busy)
+RegisterNetEvent('qbr-scoreboard:client:SetActivityBusy')
+AddEventHandler('qbr-scoreboard:client:SetActivityBusy', function(activity, busy)
     Config.IllegalActions[activity].busy = busy
 end)
 
@@ -20,9 +20,9 @@ Citizen.CreateThread(function()
         Citizen.Wait(0)
         if IsControlJustReleased(0, 0x26E9DC00) and IsInputDisabled(0) then  -- Z
             if not scoreboardOpen then
-                QBCore.Functions.TriggerCallback('qb-scoreboard:server:GetPlayersArrays', function(playerList)
-                    QBCore.Functions.TriggerCallback('qb-scoreboard:server:GetActivity', function(cops, ambulance)
-                        QBCore.Functions.TriggerCallback("qb-scoreboard:server:GetCurrentPlayers", function(Players)
+                QBCore.Functions.TriggerCallback('qbr-scoreboard:server:GetPlayersArrays', function(playerList)
+                    QBCore.Functions.TriggerCallback('qbr-scoreboard:server:GetActivity', function(cops, ambulance)
+                        QBCore.Functions.TriggerCallback("qbr-scoreboard:server:GetCurrentPlayers", function(Players)
                             PlayerOptin = playerList
                             Config.CurrentCops = cops
         
@@ -63,9 +63,9 @@ end)
 
 -- RegisterCommand('scoreboard', function()
 --     if not scoreboardOpen then
---         QBCore.Functions.TriggerCallback('qb-scoreboard:server:GetPlayersArrays', function(playerList)
---             QBCore.Functions.TriggerCallback('qb-scoreboard:server:GetActivity', function(cops, ambulance)
---                 QBCore.Functions.TriggerCallback("qb-scoreboard:server:GetCurrentPlayers", function(Players)
+--         QBCore.Functions.TriggerCallback('qbr-scoreboard:server:GetPlayersArrays', function(playerList)
+--             QBCore.Functions.TriggerCallback('qbr-scoreboard:server:GetActivity', function(cops, ambulance)
+--                 QBCore.Functions.TriggerCallback("qbr-scoreboard:server:GetCurrentPlayers", function(Players)
 --                     PlayerOptin = playerList
 --                     Config.CurrentCops = cops
 
