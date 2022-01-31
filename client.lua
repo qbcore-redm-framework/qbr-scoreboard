@@ -18,7 +18,7 @@ end)
 Citizen.CreateThread(function()
     while true do
         Citizen.Wait(0)
-        if IsControlJustReleased(0, 0x26E9DC00) and IsInputDisabled(0) then  -- Z
+        if IsControlJustReleased(0, 0x3C3DD371) and IsInputDisabled(0) then  -- PAGEDOWN
             if not scoreboardOpen then
                 QBCore.Functions.TriggerCallback('qbr-scoreboard:server:GetPlayersArrays', function(playerList)
                     QBCore.Functions.TriggerCallback('qbr-scoreboard:server:GetActivity', function(cops, ambulance)
