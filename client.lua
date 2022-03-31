@@ -1,11 +1,11 @@
-local QBCore = exports['qbr-core']:GetCoreObject()
+
 local scoreboardOpen = false
 local PlayerOptin = {}
 
 RegisterNetEvent('QBCore:Client:OnPlayerLoaded')
 AddEventHandler('QBCore:Client:OnPlayerLoaded', function()
     isLoggedIn = true
-    QBCore.Functions.TriggerCallback('qbr-scoreboard:server:GetConfig', function(config)
+    exports['qbr-core']:TriggerCallback('qbr-scoreboard:server:GetConfig', function(config)
         Config.IllegalActions = config
     end)
 end)
@@ -20,12 +20,12 @@ Citizen.CreateThread(function()
         Citizen.Wait(0)
         if IsControlJustReleased(0, 0x3C3DD371) and IsInputDisabled(0) then  -- PAGEDOWN
             if not scoreboardOpen then
-                QBCore.Functions.TriggerCallback('qbr-scoreboard:server:GetPlayersArrays', function(playerList)
-                    QBCore.Functions.TriggerCallback('qbr-scoreboard:server:GetActivity', function(cops, ambulance)
-                        QBCore.Functions.TriggerCallback("qbr-scoreboard:server:GetCurrentPlayers", function(Players)
+                exports['qbr-core']:TriggerCallback('qbr-scoreboard:server:GetPlayersArrays', function(playerList)
+                    exports['qbr-core']:TriggerCallback('qbr-scoreboard:server:GetActivity', function(cops, ambulance)
+                        exports['qbr-core']:TriggerCallback("qbr-scoreboard:server:GetCurrentPlayers", function(Players)
                             PlayerOptin = playerList
                             Config.CurrentCops = cops
-        
+
                             SendNUIMessage({
                                 action = "open",
                                 players = Players,
@@ -44,14 +44,14 @@ Citizen.CreateThread(function()
                 })
                 scoreboardOpen = false
             end
-        
+
             if scoreboardOpen then
                 for _, player in pairs(GetPlayersFromCoords(GetEntityCoords(PlayerPedId()), 10.0)) do
                     local PlayerId = GetPlayerServerId(player)
                     local PlayerPed = GetPlayerPed(player)
                     local PlayerName = GetPlayerName(player)
                     local PlayerCoords = GetEntityCoords(PlayerPed)
-        
+
                     if not PlayerOptin[PlayerId].permission then
                         DrawText3D(PlayerCoords.x, PlayerCoords.y, PlayerCoords.z + 1.0, '['..PlayerId..']')
                     end
@@ -63,9 +63,9 @@ end)
 
 -- RegisterCommand('scoreboard', function()
 --     if not scoreboardOpen then
---         QBCore.Functions.TriggerCallback('qbr-scoreboard:server:GetPlayersArrays', function(playerList)
---             QBCore.Functions.TriggerCallback('qbr-scoreboard:server:GetActivity', function(cops, ambulance)
---                 QBCore.Functions.TriggerCallback("qbr-scoreboard:server:GetCurrentPlayers", function(Players)
+--         exports['qbr-core']:TriggerCallback('qbr-scoreboard:server:GetPlayersArrays', function(playerList)
+--             exports['qbr-core']:TriggerCallback('qbr-scoreboard:server:GetActivity', function(cops, ambulance)
+--                 exports['qbr-core']:TriggerCallback("qbr-scoreboard:server:GetCurrentPlayers", function(Players)
 --                     PlayerOptin = playerList
 --                     Config.CurrentCops = cops
 
@@ -139,7 +139,7 @@ GetPlayersFromCoords = function(coords, distance)
 			table.insert(closePlayers, player)
 		end
     end
-    
+
     return closePlayers
 end
 

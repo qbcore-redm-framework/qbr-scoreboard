@@ -1,19 +1,19 @@
-local QBCore = exports['qbr-core']:GetCoreObject()
 
-QBCore.Functions.CreateCallback('qbr-scoreboard:server:GetCurrentPlayers', function(source, cb)
+
+exports['qbr-core']:CreateCallback('qbr-scoreboard:server:GetCurrentPlayers', function(source, cb)
     local TotalPlayers = 0
-    for k, v in pairs(QBCore.Functions.GetPlayers()) do
+    for k, v in pairs(exports['qbr-core']:GetPlayers()) do
         TotalPlayers = TotalPlayers + 1
     end
     cb(TotalPlayers)
 end)
 
-QBCore.Functions.CreateCallback('qbr-scoreboard:server:GetActivity', function(source, cb)
+exports['qbr-core']:CreateCallback('qbr-scoreboard:server:GetActivity', function(source, cb)
     local PoliceCount = 0
     local AmbulanceCount = 0
-    
-    for k, v in pairs(QBCore.Functions.GetPlayers()) do
-        local Player = QBCore.Functions.GetPlayer(v)
+
+    for k, v in pairs(exports['qbr-core']:GetPlayers()) do
+        local Player = exports['qbr-core']:GetPlayer(v)
         if Player ~= nil then
             if (Player.PlayerData.job.name == "police" and Player.PlayerData.job.onduty) then
                 PoliceCount = PoliceCount + 1
@@ -28,17 +28,17 @@ QBCore.Functions.CreateCallback('qbr-scoreboard:server:GetActivity', function(so
     cb(PoliceCount, AmbulanceCount)
 end)
 
-QBCore.Functions.CreateCallback('qbr-scoreboard:server:GetConfig', function(source, cb)
+exports['qbr-core']:CreateCallback('qbr-scoreboard:server:GetConfig', function(source, cb)
     cb(Config.IllegalActions)
 end)
 
-QBCore.Functions.CreateCallback('qbr-scoreboard:server:GetPlayersArrays', function(source, cb)
+exports['qbr-core']:CreateCallback('qbr-scoreboard:server:GetPlayersArrays', function(source, cb)
     local players = {}
-    for k, v in pairs(QBCore.Functions.GetPlayers()) do
-        local Player = QBCore.Functions.GetPlayer(v)
-        if Player ~= nil then 
+    for k, v in pairs(exports['qbr-core']:GetPlayers()) do
+        local Player = exports['qbr-core']:GetPlayer(v)
+        if Player ~= nil then
             players[Player.PlayerData.source] = {}
-            players[Player.PlayerData.source].permission = QBCore.Functions.IsOptin(Player.PlayerData.source)
+            players[Player.PlayerData.source].permission = exports['qbr-core']:IsOptin(Player.PlayerData.source)
         end
     end
     cb(players)
