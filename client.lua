@@ -1,4 +1,3 @@
-
 local scoreboardOpen = false
 local PlayerOptin = {}
 
@@ -15,17 +14,17 @@ AddEventHandler('qbr-scoreboard:client:SetActivityBusy', function(activity, busy
     Config.IllegalActions[activity].busy = busy
 end)
 
-Citizen.CreateThread(function()
+CreateThread(function()
+    print(true)
     while true do
-        Citizen.Wait(0)
-        if IsControlJustReleased(0, 0x3C3DD371) and IsInputDisabled(0) then  -- PAGEDOWN
+        Wait(0)
+        if IsControlJustReleased(0, Config.OpenKey)  then  -- Config Keybind
             if not scoreboardOpen then
                 exports['qbr-core']:TriggerCallback('qbr-scoreboard:server:GetPlayersArrays', function(playerList)
                     exports['qbr-core']:TriggerCallback('qbr-scoreboard:server:GetActivity', function(cops, ambulance)
                         exports['qbr-core']:TriggerCallback("qbr-scoreboard:server:GetCurrentPlayers", function(Players)
                             PlayerOptin = playerList
                             Config.CurrentCops = cops
-
                             SendNUIMessage({
                                 action = "open",
                                 players = Players,
@@ -100,16 +99,16 @@ end)
 --             end
 --         end
 --     end
--- end)
+-- end, false)
 
 -- RegisterKeyMapping('scoreboard', 'Open Scoreboard', 'keyboard', 'HOME')
 
 -- Functions
 
-DrawText3D = function(x, y, z, text)
+function DrawText3D(x, y, z, text)
 	SetTextScale(0.35, 0.35)
     SetTextFont(4)
-    SetTextProportional(1)
+    SetTextProportional(true)
     SetTextColour(255, 255, 255, 215)
     SetTextEntry("STRING")
     SetTextCentre(true)
@@ -121,7 +120,7 @@ DrawText3D = function(x, y, z, text)
     ClearDrawOrigin()
 end
 
-GetPlayersFromCoords = function(coords, distance)
+function GetPlayersFromCoords(coords, distance)
     local players = GetPlayers()
     local closePlayers = {}
 
@@ -143,7 +142,7 @@ GetPlayersFromCoords = function(coords, distance)
     return closePlayers
 end
 
-GetPlayers = function()
+function GetPlayers()
     local players = {}
     for _, player in ipairs(GetActivePlayers()) do
         local ped = GetPlayerPed(player)
