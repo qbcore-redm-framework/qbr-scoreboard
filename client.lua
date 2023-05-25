@@ -15,7 +15,6 @@ AddEventHandler('qbr-scoreboard:client:SetActivityBusy', function(activity, busy
 end)
 
 CreateThread(function()
-    print(true)
     while true do
         Wait(0)
         if IsControlJustReleased(0, Config.OpenKey)  then  -- Config Keybind
