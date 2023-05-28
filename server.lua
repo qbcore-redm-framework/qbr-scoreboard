@@ -1,5 +1,3 @@
-
-
 exports['qbr-core']:CreateCallback('qbr-scoreboard:server:GetCurrentPlayers', function(source, cb)
     local TotalPlayers = 0
     for k, v in pairs(exports['qbr-core']:GetPlayers()) do

@@ -1,7 +1,7 @@
 Config = Config or {}
 
 -- Open scoreboard key
-Config.OpenKey = 0x05CA7C52
+Config.OpenKey = 0xD8F73058
 
 -- Max Server Players
 Config.MaxPlayers = GetConvarInt('sv_maxclients', 8) -- It returnes 64 if it cant find the Convar Int
@@ -16,7 +16,7 @@ Config.IllegalActions = {
         minimum = 3,
         busy = false,
     },
-    ["jewellery"] = {
+    ["jewelry"] = {
         minimum = 3,
         busy = false,
     },
