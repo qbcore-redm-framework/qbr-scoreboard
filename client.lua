@@ -70,19 +70,17 @@ CreateThread(function()
             if not scoreboardOpen then
                 exports['qbr-core']:TriggerCallback('qbr-scoreboard:server:GetPlayersArrays', function(playerList)
                     exports['qbr-core']:TriggerCallback('qbr-scoreboard:server:GetActivity', function(cops, ambulance)
-                        exports['qbr-core']:TriggerCallback("qbr-scoreboard:server:GetCurrentPlayers", function(Players)
-                            PlayerOptin = playerList
-                            Config.CurrentCops = cops
-                            SendNUIMessage({
-                                action = "open",
-                                players = Players,
-                                maxPlayers = Config.MaxPlayers,
-                                requiredCops = Config.IllegalActions,
-                                currentCops = Config.CurrentCops,
-                                currentAmbulance = ambulance
-                            })
-                            scoreboardOpen = true
-                        end)
+						PlayerOptin = playerList
+						Config.CurrentCops = cops
+						SendNUIMessage({
+							action = "open",
+							players = GlobalState['Count:Players'],
+							maxPlayers = Config.MaxPlayers,
+							requiredCops = Config.IllegalActions,
+							currentCops = Config.CurrentCops,
+							currentAmbulance = ambulance
+						})
+						scoreboardOpen = true
                     end)
                 end)
             else
