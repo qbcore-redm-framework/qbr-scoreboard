@@ -17,3 +17,5 @@ server_scripts {
 files {
     "html/*"
 }
+
+lua54 'yes'
