@@ -4,16 +4,14 @@ rdr3_warning 'I acknowledge that this is a prerelease build of RedM, and I am aw
 
 ui_page "html/ui.html"
 
-client_scripts {
-    'client.lua',
-	'config.lua',
-}
+shared_script 'config.lua'
 
-server_scripts {
-	'config.lua',
-	'server.lua',
-}
+client_script 'client.lua'
+
+server_script 'server.lua'
 
 files {
     "html/*"
 }
+
+lua54 'yes'

@@ -1,11 +1,3 @@
-exports['qbr-core']:CreateCallback('qbr-scoreboard:server:GetCurrentPlayers', function(source, cb)
-    local TotalPlayers = 0
-    for k, v in pairs(exports['qbr-core']:GetPlayers()) do
-        TotalPlayers += 1
-    end
-    cb(TotalPlayers)
-end)
-
 exports['qbr-core']:CreateCallback('qbr-scoreboard:server:GetActivity', function(source, cb)
     local PoliceCount, AmbulanceCount = 0, 0
     for k, v in pairs(exports['qbr-core']:GetPlayers()) do
